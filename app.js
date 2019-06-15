@@ -70,6 +70,6 @@ app.get('/posts/:id', (req, res) => {
 });
 
 
-app.listen(5000, function() {
+app.listen((process.env.PORT || 5000), function() {
   console.log("Server started on port 3000");
 });
