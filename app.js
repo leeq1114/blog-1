@@ -4,6 +4,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
 const MyPostManager = require('./post.js');
+require('./config.js');
 
 console.log(MyPostManager);
 const postManager = new MyPostManager();
@@ -69,7 +70,6 @@ app.get('/posts/:id', (req, res) => {
   });
 });
 
-
-app.listen((process.env.PORT || 5000), function() {
-  console.log("Server started on port 3000");
+app.listen(process.env.PORT || 3000, function() {
+  console.log("Server started on port " + (process.env.PORT || 3000));
 });

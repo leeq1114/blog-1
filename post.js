@@ -1,11 +1,8 @@
 // jshint esversion: 6
+require('./config.js');
 const mongoose = require('mongoose');
 
-const username = 'admin';
-const password = 'admin';
-const dbname = 'blog';
-
-const url = `mongodb+srv://${username}:${password}@cluster0-5htv5.mongodb.net/${dbname}?retryWrites=true&w=majority`;
+const url = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0-5htv5.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`;
 console.log(url);
 mongoose.connect(url, { useNewUrlParser: true });
 mongoose.connection.once('open', () => console.log('Connection succeeded!'));
