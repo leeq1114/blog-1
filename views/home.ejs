@@ -1,0 +1,16 @@
+<%- include('shared/header') %>
+<h1>Home</h1>
+<p><%= homeStartingContent %></p>
+
+<% posts.forEach(e => { %>
+<div class="">
+  <h1><%= e.title %></h1>
+  <p><%= e.content.slice(0, 100) %>
+    <% if (e.content.length > 100) { %>
+      ...
+    <% } %>
+    <a href="/posts/<%= e.id %>">Read More</a>
+  </p>
+</div>
+<% }) %>
+<%- include('shared/footer') %>

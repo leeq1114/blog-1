@@ -1,0 +1,18 @@
+<%- include('shared/header') %>
+
+<h1>Compse A Post</h1>
+<form class="" action="/compose" method="post">
+  <div class="form-group">
+    <label for="title">Title</label>
+    <input type="text" class="form-control" name="title" value="">
+  </div>
+
+  <div class="form-group">
+    <label for="content">Content</label>
+    <textarea class="form-control" name="content" rows="8" cols="80"></textarea>
+  </div>
+
+  <button type="submit" class="btn btn-primary">Publish</button>
+</form>
+
+<%- include('shared/footer') %>
