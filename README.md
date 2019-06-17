@@ -15,4 +15,5 @@ DB_CLUSTER=***  // MongoDB Atlas cluster domain name, which appears in your conn
 ### Heroku
 
 Please set Heroku's config vars the same as above for Heroku to use.
-[Reference Here](https://devcenter.heroku.com/articles/config-vars)
+
+[Please reference here](https://devcenter.heroku.com/articles/config-vars).
