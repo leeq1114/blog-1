@@ -2,7 +2,7 @@
 require('./config.js');
 const mongoose = require('mongoose');
 
-const url = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0-5htv5.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`;
+const url = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_CLUSTER}.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`;
 console.log(url);
 mongoose.connect(url, { useNewUrlParser: true });
 mongoose.connection.once('open', () => console.log('Connection succeeded!'));
