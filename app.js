@@ -70,6 +70,24 @@ app.get('/posts/:id', (req, res) => {
   });
 });
 
+app.get('/login', (req, res) => {
+  res.render('login');
+});
+
+app.post('/login', (req, res) => {
+  console.log(req.body);
+  res.redirect('/');
+});
+
+app.get('/register', (req, res) => {
+  res.render('register');
+});
+
+app.post('/register', (req, res) => {
+  console.log(req.body);
+  res.redirect('/login');
+});
+
 app.listen(process.env.PORT || 3000, function() {
   console.log("Server started on port " + (process.env.PORT || 3000));
 });
