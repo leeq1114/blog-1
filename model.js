@@ -13,11 +13,9 @@ const postSchema = new mongoose.Schema({
   content: String
 });
 
-const Post = mongoose.model('post', postSchema);
+module.exports.Post = mongoose.model('post', postSchema);
 
-// posts: id: TEXT, title TEXT, content TEXT
-
-module.exports = class PostManager {
+module.exports.PostManager = class {
   findAll(callback) {
     Post.find((err, data) => {
       data.forEach(elem => elem.id = elem._id.toString());
@@ -39,3 +37,12 @@ module.exports = class PostManager {
     });
   }
 };
+
+
+// user schema
+const userSchema = new mongoose.Schema({
+  username: String,
+  password: String
+});
+
+module.exports.User = mongoose.model('user', userSchema);

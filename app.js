@@ -3,11 +3,10 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
-const MyPostManager = require('./post.js');
+const { PostManager, User } = require('./model.js');
 require('./config.js');
 
-console.log(MyPostManager);
-const postManager = new MyPostManager();
+const postManager = new PostManager();
 
 const homeStartingContent = "Lacus vel facilisis volutpat est velit egestas dui id ornare. Semper auctor neque vitae tempus quam. Sit amet cursus sit amet dictum sit amet justo. Viverra tellus in hac habitasse. Imperdiet proin fermentum leo vel orci porta. Donec ultrices tincidunt arcu non sodales neque sodales ut. Mattis molestie a iaculis at erat pellentesque adipiscing. Magnis dis parturient montes nascetur ridiculus mus mauris vitae ultricies. Adipiscing elit ut aliquam purus sit amet luctus venenatis lectus. Ultrices vitae auctor eu augue ut lectus arcu bibendum at. Odio euismod lacinia at quis risus sed vulputate odio ut. Cursus mattis molestie a iaculis at erat pellentesque adipiscing.";
 const aboutContent = "Hac habitasse platea dictumst vestibulum rhoncus est pellentesque. Dictumst vestibulum rhoncus est pellentesque elit ullamcorper. Non diam phasellus vestibulum lorem sed. Platea dictumst quisque sagittis purus sit. Egestas sed sed risus pretium quam vulputate dignissim suspendisse. Mauris in aliquam sem fringilla. Semper risus in hendrerit gravida rutrum quisque non tellus orci. Amet massa vitae tortor condimentum lacinia quis vel eros. Enim ut tellus elementum sagittis vitae. Mauris ultrices eros in cursus turpis massa tincidunt dui.";
@@ -76,7 +75,25 @@ app.get('/login', (req, res) => {
 
 app.post('/login', (req, res) => {
   console.log(req.body);
-  res.redirect('/');
+  User.find({
+    username: req.body.username
+  }, (err, users) => {
+    if (err) {
+      console.error(err);
+    } else if (users && users.length > 0) {
+      const user = users[0];
+      if (user.password === req.body.password) {
+        // Login succeeded.
+        res.redirect('/');
+        return;
+      } else {
+        console.log('Wrong password!');
+      }
+    } else {
+      console.log('No user');
+    }
+    res.redirect('/login');
+  });
 });
 
 app.get('/register', (req, res) => {
@@ -85,7 +102,19 @@ app.get('/register', (req, res) => {
 
 app.post('/register', (req, res) => {
   console.log(req.body);
-  res.redirect('/login');
+  const user = new User({
+    username: req.body.username,
+    password: req.body.password
+  });
+  user.save((err, data) => {
+    if (err) {
+      console.error(err);
+      res.redirect('/register');
+    } else {
+      console.log('User created: ', JSON.stringify(data));
+      res.redirect('/login');
+    }
+  });
 });
 
 app.listen(process.env.PORT || 3000, function() {
