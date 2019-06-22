@@ -33,3 +33,13 @@
 	font-size: 12px;
   color: #fff;
 }
+
+.user-form {
+  margin: 10% auto;
+  max-width: 800px;
+}
+
+.jumbotron > h1 {
+  text-align: center;
+  margin-bottom: 50px;
+}
